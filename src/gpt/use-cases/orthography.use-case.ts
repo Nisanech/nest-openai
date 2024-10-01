@@ -5,12 +5,6 @@ interface Options {
   prompt: string;
 }
 
-interface JsonResponse {
-  userScore: number;
-  errors: string[];
-  message: string;
-}
-
 export const orthographyUseCase = async (openai: OpenAI, options: Options) => {
   const { prompt } = options;
 
@@ -44,7 +38,5 @@ export const orthographyUseCase = async (openai: OpenAI, options: Options) => {
     max_tokens: 150,
   });
 
-  const jsonResponse: JsonResponse = JSON.parse(completion.choices[0].message.content);
-
-  return jsonResponse;
+  return JSON.parse(completion.choices[0].message.content);
 };
